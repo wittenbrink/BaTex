@@ -1,0 +1,9 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\begin{document}
+Für die Beobachtung der Laubverfärbung werden in dieser Arbeit zwei verschiedene Datensätze herangezogen. Zum einen ein Datensatz zur \textit{End Of Season Time}, bereitgestellt vom U. S. Geological Survey (USGS). Dieser Datensatz wurde produziert aus NDVI-Beobachtungen der \textit{MODerate-resolution Imaging Spectroradiometer(MODIS)}-Sensoren der NASA-Satelliten Terra und Aqua. Diese Satelliten überfliegen die Erde alle ein bis zwei Tage. Alle sieben Tage ist ein korrigierter NDVI-Wert mit einer Auflösung von $250m \cdot 250m$ verfügbar.
+
+Die \textit{End Of Season Time} identifiziert den Tag, an dem die Photosyntheseaktivität der Vegetationsoberfläche das Ende der Seneszenz erreicht. Hierzu werden für jeden Pixel geglättete NDVI-Beobachtungs-Zeitreihen erstellt. Dann wird der Reihe nach jeder Wert mit einem vorwärts gerichteten \textit{moving-average} verglichen. Der Tag, an dem der NDVI der geglätteten Zeitreihe unter den vorwärts gerichteten \textit{moving average}-Wert fällt, wird als \textit{End Of Season Time} definiert. Um eine Genauigkeit von einem Tag zu erreichen, wird zwischen den korrigierten NDVI-Werten linear interpoliert. Die Länge des \textit{moving-average}-Fensters wird auf 36 Wochen festgelegt. Verfügbar ist die MODIS-\textit{End Of Season Time} für die Jahre 2001-2016.
+
+Die \textit{End of Season Time} bezeichnet daher nicht direkt den Zeitpunkt der Laubverfärbung, sondern vielmehr das absolute Ende der Phase der Photosyntheseaktivität. Dieser Datensatz lässt jedoch Rückschlüsse auf die zu untersuchende Vegetations-Phänologie zu, es wird angenommen, dass bei einer verhältnismäßig frühen Laubverfärbung auch die \textit{End Of Season Time} früher eintritt und umgekehrt. Außerdem kann es hilfreich sein, die \textit{End Of Season Time} mit anderen Datensätzen zur Laubverfärbung zu vergleichen.
+\end{document}

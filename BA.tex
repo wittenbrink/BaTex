@@ -1,0 +1,84 @@
+
+
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\begin{document}
+
+
+\tableofcontents
+\newpage
+\section{Einleitung}
+
+
+Ziel dieser Arbeit ist es, ein Modell zu entwickeln, welches den Zeitpunkt der Laubverfärbung in Nordamerika unter Zuhilfenahme von meteorologischen Variablen möglichst genau vorhersagt. Hierzu werden über einen längeren Zeitraum Klimareanalysedaten mit Satellitenbeobachtungen zur Laubverfärbung verglichen.
+\\ \\
+Die Laubverfärbung, also das Vertrocknen und Absterben der Blätter in Laubwäldern, ist für Wetter- und Klimamodelle relevant, da sich bei der Verfärbung die Albedo, also der Anteil der nicht zurückgestreuten Strahlung, der Blätter verändert. Außerdem endet die Photosynthese-Aktivität in den Blättern, d. h. die Umwandlung von $CO_2$ in Sauerstoff und die Evaporation nehmen ab, was gerade bei größeren zusammenhängenden Waldstücken einen Einfluss auf Temperatur, $CO_2$-Konzentration und Luftfeuchte in den unteren Schichten hat. Eine einigermaßen zuverlässige Vorhersage des Laubverfärbungszeitpunktes könnte daher Wetter- und Klimamodelle verbessern.
+\\ \\
+Der genaue Laubverfärbungszeitpunkt ist auch für die Tourismus-Branche relevant, was eine weitere mögliche konkrete Anwendungsmöglichkeit für ein solches Vorhersage-Modell darstellt.
+\\ \\
+Außerdem soll mit dieser Arbeit am Beispiel der Laubverfärbung untersucht werden, ob und wie aus Klimareanalysedaten mit statistischen Mitteln Erkenntnisse gewonnen werden können, die ansonsten aufwendige Labor- oder Feldversuche erfordern würden.
+\\ \\ \\
+Für das Modell zur Vorhersage des Laubverfärbungszeitpunktes werden Klimareanalysedaten mit Satellitenbeobachtungen verglichen. An Klimareanalysedaten werden aus der Klimareanalyse ERA-Interim vom ECMWF [Dr. Dick Dee] Variablen wie Temperaturen in verschiedenen Höhen, Luftfeuchte, Druck, Niederschlag und Sonnenscheindauer verwendet. Als Satellitenbeobachtung zur Laubverfärbung wurden zunächst Datensätze zur End-Of-Season-Time des eMODIS-Satelliten Terra verwendet. Diese standen von 2001-2016 mit einer Auflösung von 250m zur Verfügung. Da die Ergebnisse nicht allzu zufriedenstellend waren und die End-Of-Season-Time auch nicht genau den gesuchten Zeitpunkt der Laubverfärbung beschreibt, wurden in einem zweiten Schritt aus NDVI-Daten (Normalized Difference Vegetation Index) des NOAA-AVHRR-Satelliten ein sogenannter "Brownness-Index" und eine "Peak-Brownness-Time" nach [Zhang et al...] berechnet. 
+Diese Daten wurden einander räumlich und zeitlich zugeordnet und verglichen, um mit Hilfe von multiplen linearen Regressionen Zusammenhänge zwischen meteorologischen Variablen über die komplette Saison und dem Zeitpunkt der Laubverfärbung herzustellen. Daraus soll schließlich ein Modell entstehen, welches den Zeitpunkt der Laubverfärbung schon möglichst früh und möglichst genau vorhersagen kann. Da der Zeitpunkt der Laubverfärbung sehr stark von der Art des jeweiligen Baumes bzw. Waldstückes abhängt, wird in dieser Arbeit mit daten von Nordamerika gearbeitet, wo es sehr große zusammenhängende homogene Waldgebiete gibt. Außerdem wird mit einer relativ hohen räumlichen Auflösung gearbeitet. Gemischte Waldgebiete werden zu einer Mischform mit einem mittleren Laubverfärbungszeitpunkt zusammengefasst [-> Zhang et. al]. Es werden für jeden Pixel Zeitreihen analysiert. Ein Vergleich mit anderen Pixeln geschieht nicht, da nicht davon ausgegangen werden kann, dass die Bedingungen vergleichbar sind. Auch zeitlich sind die Daten nur dann vergleichbar, wenn sich Zusammensetzung und Zustand des Waldstücks unter einem Pixel über den Beobachtungszeitraum nicht wesentlich verändern, wovon hier ausgegangen wird.
+
+\newpage
+\section{Meteorologische Grundlagen}
+\subsection{Klimareanalysen}
+Ein großer Teil der Daten, die in dieser Arbeit verwendet werden, stammt aus der Klimareanalyse Era-Interim vom Europäischen Zentrum für Mittelfrist-Wettervorhersagen (ECMWF). Klimareanalysen sind ein systematischer Ansatz, Datensätze für Klima-Monitoring und Forschungszwecke zu gewinnen. Sie sind eine vierdimensionale Beschreibung des Zustands der Atmosphäre, bestehend aus einem numerischen Wettervorhersagemodell und einem Datenassimilationssystem. Das Modell gibt für jeden Zeitschritt eine dynamisch konsistente Schätzung des Zustands der Atmosphäre aus. Über ein statisches Datenassimilationssystem wird es laufend an Beobachtungsdaten angeglichen. Diese Beobachtungsdaten stammen von Wetterstationen, Radionsonden, Satelliten, Bojen, Flugzeug- und Schiffsmeldungen. Sie stellen die einzige Veränderliche Komponente einer Reanalyse dar, da Anzahl und Qualität der Beobachtungsdaten durchaus schwanken können. 
+\section{Methoden}
+Für diese Arbeit wurden die Daten der Reanalyse Era-Interim verwendet. Die Entscheidung für Era-Interim fiel, da diese Reanalyse sich bereits in vielen Untersuchungen als zuverlässige Datenquelle bewiesen hat. Der verfübgare
+Zeitraum deckt gut den Zeitraum der verwendeten Satellitendaten ab. Außerdem war der Zugang zu diesen Daten relativ einfach, was in der begrenzten Zeit, die für eine Bachelorarbeit zur Verfügung steht, durchaus auch eine Rolle spielt. Mit einer Auflösung von etwa 80 km sind die Era-Interim-Daten deutlich gröber aufgelöst als die verwendeten Satellitendaten (250 bzw 500?/1000?m). Eine mit den Satellitendaten vergleichbar hoch aufgelöste Reanalyse gibt es allerdings nicht für den gesuchten Zeitraum und die gesuchte räumliche Ausdehnung.
+\\
+\\
+Aus den bei Era-Interim verfügbaren Variablen wurden acht ausgewählt, die in dieser Arbeit mit Satellitendaten verglichen werden. Zwei weitere Variablen wurden aus diesen Daten berechnet. Dies sind zum einen die relative Feuchte und zum anderen die Wachstumsgradtage. Die relative Feuchte wurde aus 2m-Temperatur und 2m-Taupunkttemperatur mithilfe folgender Formeln berechnet:
+
+\begin{equation}
+relhum=\frac{e_{sat}(TD)}{e_{sat}(T)}
+\end{equation}
+Der Sättigungsdampfdruck $e_{sat}$ wird über die Magnusformel berechnet (MAGNUSFORMEL NOCHMAL CHECKEN!) :
+\begin{equation}
+e_{sat}(T)=6,112hPa\cdot\exp\left(\frac{17,62 \cdot T}{243,12 + T}\right)
+\end{equation}
+Dann ergibt sich:
+\begin{equation}
+relhum(T,TD)=\exp\left(17,62\cdot\left(\frac{TD}{TD-30,03K}-\frac{T}{T-30,03K}\right)\right)
+\end{equation}
+Wachstumsgradtage bezeichnen eine Größe, die relativ häufig im Zusammenhang mit dem Wachstum von Pflanzen verwendet wird. Mit Wachstumsgradtagen wird die Anzahl Tage bezeichnet, an denen die Durchschnittstemperatur über einem
+Schwellwert liegt, gewichtet mit der Differenz zum Schwellwert. Es gibt unterschiedliche Methoden, diese Wachstumsgradtage zu berechnen. In dieser Arbeit wird die folgende Formel berechnet:
+\begin{equation}
+WGT=\begin{cases}
+T_{mean}-T_0 & \;\;\;\text{ wenn }  T_{mean}>T_0 \\
+0 & \; \;\;\text{ sonst} 
+\end{cases}
+\end{equation}
+Hierbei bezeichnet $T_{mean}$ die mittlere 2m-Temperatur eines Tages und $T_0$ die Schwellwerttemperatur. Für diese Arbeit wurde die Schwellwerttemperatur auf $T_0=10^\circ C$ gesetzt. \\
+
+\begin{tabular}{|c|c|}
+	\multicolumn{2}{c}{verwendete Variablen}\\
+	\hline
+	Schneehöhe& Era-Interim\\
+	\hline
+	Schneefall& Era-Interim\\
+	\hline
+	2m-Temperatur& Era-Interim \\
+	\hline
+	2m-Taupunkttemperatur& Era-Interim\\
+	\hline
+	Bodentemperatur&Era-Interim\\
+	\hline
+	Evaporation& Era-Interim\\
+	\hline
+	Sonnenscheindauer& Era-Interim\\
+	\hline
+	Niederschlag& Era-Interim\\
+	\hline
+	Wachstumsgradtage& berechnet\\
+	\hline
+	relative Feuchte& berechnet\\
+	\hline
+\end{tabular}
+
+
+
+\end{document}

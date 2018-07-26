@@ -3,6 +3,7 @@
 \documentclass[]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{csquotes}
 \begin{document}
 
 
@@ -26,23 +27,46 @@ Diese Daten wurden einander räumlich und zeitlich zugeordnet und verglichen, um
 \section{Meteorologische Grundlagen}
 \subsection{Klimareanalysen}
 Ein großer Teil der Daten, die in dieser Arbeit verwendet werden, stammt aus der Klimareanalyse Era-Interim vom Europäischen Zentrum für Mittelfrist-Wettervorhersagen (ECMWF). Klimareanalysen sind ein systematischer Ansatz, Datensätze für Klima-Monitoring und Forschungszwecke zu gewinnen. Sie sind eine vierdimensionale Beschreibung des Zustands der Atmosphäre, bestehend aus einem numerischen Wettervorhersagemodell und einem Datenassimilationssystem. Das Modell gibt für jeden Zeitschritt eine dynamisch konsistente Schätzung des Zustands der Atmosphäre aus. Über ein statisches Datenassimilationssystem wird es laufend an Beobachtungsdaten angeglichen. Diese Beobachtungsdaten stammen von Wetterstationen, Radionsonden, Satelliten, Bojen, Flugzeug- und Schiffsmeldungen. Sie stellen die einzige Veränderliche Komponente einer Reanalyse dar, da Anzahl und Qualität der Beobachtungsdaten durchaus schwanken können. 
-\section{Methoden}
-Für diese Arbeit wurden die Daten der Reanalyse Era-Interim verwendet. Die Entscheidung für Era-Interim fiel, da diese Reanalyse sich bereits in vielen Untersuchungen als zuverlässige Datenquelle bewiesen hat. Der verfübgare
-Zeitraum deckt gut den Zeitraum der verwendeten Satellitendaten ab. Außerdem war der Zugang zu diesen Daten relativ einfach, was in der begrenzten Zeit, die für eine Bachelorarbeit zur Verfügung steht, durchaus auch eine Rolle spielt. Mit einer Auflösung von etwa 80 km sind die Era-Interim-Daten deutlich gröber aufgelöst als die verwendeten Satellitendaten (250 bzw 500?/1000?m). Eine mit den Satellitendaten vergleichbar hoch aufgelöste Reanalyse gibt es allerdings nicht für den gesuchten Zeitraum und die gesuchte räumliche Ausdehnung.
+
+Klimareanalysen liefern Datensätze mit hunderten von Variablen aus einem konsistenten System bei konstanter räumlicher und zeitlicher Auflösung über mehrere Dekaden. Modellauflösung und Fehler werden dabei bei neuen Reanalysen ständig verbessert. Über die Datenassimilationssysteme werden teilweise Millionen von Beobachtungen aufgenommen, was von Hand wohl kaum möglich wäre. Die Einheitlichen konsistenten Datensätze vereinfachen die Arbeit für viele Anwendungen. Die Beobachtungen allerdings, und damit die Verlässlichkeit einer Reanalyse, können abhängig von Ort, Zeit und Variable stark schwanken. Der wechselhafte Beobachtungsmix kann zu falschen Trends und Variabilitäten im Output einer Reanalyse führen. Außerdem musste festgestellt werden, dass diagnostische Variablen im Zusammenhang mit dem hydrologischen Kreislauf, wie z. B. Niederschlag und Evaporation, mit Vorsicht verwendet werden sollten.
+
+[https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables zitieren]
+\subsection{NDVI}
+Der \textit{Normalized Divergence Vegetation Index} (NDVI) ist ein Index, der aus Satellitenbeobachtungen einen Wert für die Vegetationsdichte in einem Pixel ausgibt. Hierzu werden zwei Kanäle miteinander verglichen: Sichtbares Licht ($0,4-0,7 \mu m$ Wellenlänge) und Licht aus dem Nah-Infrarotbereich ($0,7 - 1,1 \mu m$ Wellenlänge). Chlorophyll, der Stoff der in Pflanzen für die Photosynthese sorgt, absorbiert sichtbares Licht verhältnismäßig stark. Die Zellstruktur der Blätter dagegen reflektiert Licht aus dem Nah-Infrarotbereich sehr stark. Diese beiden Effekte werden werden für den NDVI verwendet, welcher sich aus folgender Formel berechnen lässt:
+\begin{equation}
+NDVI=\frac{NIR - VIS}{NIR + VIS}
+\end{equation}
+$NIR$ steht hier für Reflexion im Nah-Infrarotbereich, $VIS$ für Reflexion im sichtbaren Wellenlängenbereich, beide Werte in $\%$.
+[https://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring\_vegetation\_2.php]
+\subsection{Statistik?}
+\section{verwendete Daten}
+\subsection{Era-Interim}
+Für diese Arbeit wurden die Daten der Reanalyse Era-Interim verwendet. Die Entscheidung für Era-Interim fiel, da diese Reanalyse sich bereits in vielen Untersuchungen als zuverlässige Datenquelle bewiesen hat. Der verfübgare Zeitraum deckt gut den Zeitraum der verwendeten Satellitendaten ab. Außerdem war der Zugang zu diesen Daten relativ einfach, was in der begrenzten Zeit, die für eine Bachelorarbeit zur Verfügung steht, durchaus auch eine Rolle spielt. Mit einer Auflösung von etwa 80 km sind die Era-Interim-Daten deutlich gröber aufgelöst als die verwendeten Satellitendaten ($250m$ bzw $0,05^{\circ}$). Eine mit den Satellitendaten vergleichbar hoch aufgelöste Reanalyse gibt es allerdings nicht für den gesuchten Zeitraum und die gesuchte räumliche Ausdehnung.
 \\
 \\
-Aus den bei Era-Interim verfügbaren Variablen wurden acht ausgewählt, die in dieser Arbeit mit Satellitendaten verglichen werden. Zwei weitere Variablen wurden aus diesen Daten berechnet. Dies sind zum einen die relative Feuchte und zum anderen die Wachstumsgradtage. Die relative Feuchte wurde aus 2m-Temperatur und 2m-Taupunkttemperatur mithilfe folgender Formeln berechnet:
+
+\subsection{MODIS-EOST}
+Für die Beobachtung der Laubverfärbung werden in dieser Arbeit zwei verschiedene Datensätze herangezogen. Zum einen ein Datensatz zur \textit{End Of Season Time}, bereitgestellt vom U. S. Geological Survey (USGS). Dieser Datensatz wurde produziert aus NDVI-Beobachtungen der \textit{MODerate-resolution Imaging Spectroradiometer(MODIS)}-Sensoren der NASA-Satelliten Terra und Aqua. Diese Satelliten überfliegen die Erde alle ein bis zwei Tage. Alle sieben Tage ist ein korrigierter NDVI-Wert mit einer Auflösung von $250m \cdot 250m$ verfügbar.
+
+Die \textit{End Of Season Time} identifiziert den Tag, an dem die Photosyntheseaktivität der Vegetationsoberfläche das Ende der Seneszenz erreicht. Hierzu werden für jeden Pixel geglättete NDVI-Beobachtungs-Zeitreihen erstellt. Dann wird der Reihe nach jeder Wert mit einem vorwärts gerichteten \textit{moving-average} verglichen. Der Tag, an dem der NDVI der geglätteten Zeitreihe unter den vorwärts gerichteten \textit{moving average}-Wert fällt, wird als \textit{End Of Season Time} definiert. Um eine Genauigkeit von einem Tag zu erreichen, wird zwischen den korrigierten NDVI-Werten linear interpoliert. Die Länge des \textit{moving-average}-Fensters wird auf 36 Wochen festgelegt. Verfügbar ist die MODIS-\textit{End Of Season Time} für die Jahre 2001-2016. Der Datensatz deckt räumlich die östliche Hälfte der USA ab.
+
+Die \textit{End of Season Time} bezeichnet daher nicht direkt den Zeitpunkt der Laubverfärbung, sondern vielmehr das absolute Ende der Phase der Photosyntheseaktivität. Dieser Datensatz lässt jedoch Rückschlüsse auf die zu untersuchende Vegetations-Phänologie zu, es wird angenommen, dass bei einer verhältnismäßig frühen Laubverfärbung auch die \textit{End Of Season Time} früher eintritt und umgekehrt. Außerdem kann es hilfreich sein, die \textit{End Of Season Time} mit anderen Datensätzen zur Laubverfärbung zu vergleichen.
+\subsection{NOAA AVHRR NDVI}
+Der zweite verwendete Datensatz von Satellitenbeobachtungen zur Laubverfärbung ist ein NDVI-Datensatz des AVHRR(Advanced Very High Resolution Radiometer)-Sensors von polarumlaufenden NOAA (National Oceanic and Atmospheric Administration)-Satelliten. Dieser Datensatz stellt von 1982 bis heute täglich global NDVI-Werte mit einer Auflösung von $0,05^\circ$ zur Verfügung. Da der NDVI bei Bewölkung nicht korrekt gemessen werden kann, sind die nicht nachbearbeiteten täglichen NDVI-Werte häufig fehlerhaft. Der Datensatz liefert hierzu sogenannte \enquote{Quality Assurance}-Flags mit, die für jeden Pixel unter anderem Einflüsse von Wolken, Wolkenschatten und Wasseroberflächen angeben. Mit Hilfe dieser QA-Flags können potentiell fehlerhafte Werte direkt ausgeschlossen werden. Aus diesem NDVI-Datensatz wird dann ein \enquote{Temporally Normalized Brownness Index} nach [Zhang et al] berechnet.       
+\section{Datenverarbeitung/Preprocessing}
+\subsection{Era-Interim}
+Aus den bei Era-Interim verfügbaren Variablen wurden acht ausgewählt, die in dieser Arbeit mit Satellitendaten verglichen werden. Zwei weitere Variablen wurden aus diesen Daten berechnet. Dies sind zum einen die relative Feuchte und zum anderen die Wachstumsgradtage. Die relative Feuchte wurde aus 2m-Temperatur und 2m-Taupunkttemperatur mithilfe folgender Formeln berechnet (mit $T=$ 2m-Temperatur in $^{\circ} C$ und $TD=$ 2m-Taupunkttemperatur in $^{\circ}C$):
 
 \begin{equation}
 relhum=\frac{e_{sat}(TD)}{e_{sat}(T)}
 \end{equation}
-Der Sättigungsdampfdruck $e_{sat}$ wird über die Magnusformel berechnet (MAGNUSFORMEL NOCHMAL CHECKEN!) :
+Der Sättigungsdampfdruck $e_{sat}$ abhängig von der Temperatur $T$ wird über die Magnusformel berechnet [nach Sommer, D. 1990 ...] :
 \begin{equation}
-e_{sat}(T)=6,112hPa\cdot\exp\left(\frac{17,62 \cdot T}{243,12 + T}\right)
+e_{sat}(T)=6,112hPa\cdot\exp\left(\frac{17,62 \cdot T}{243,12 ^{\circ}C + T}\right)
 \end{equation}
 Dann ergibt sich:
 \begin{equation}
-relhum(T,TD)=\exp\left(17,62\cdot\left(\frac{TD}{TD-30,03K}-\frac{T}{T-30,03K}\right)\right)
+relhum(T,TD)=\exp\left(17,62\cdot\left(\frac{TD}{TD+243,12^{\circ}C}-\frac{T}{T+243,12^{\circ}C}\right)\right)
 \end{equation}
 Wachstumsgradtage bezeichnen eine Größe, die relativ häufig im Zusammenhang mit dem Wachstum von Pflanzen verwendet wird. Mit Wachstumsgradtagen wird die Anzahl Tage bezeichnet, an denen die Durchschnittstemperatur über einem
 Schwellwert liegt, gewichtet mit der Differenz zum Schwellwert. Es gibt unterschiedliche Methoden, diese Wachstumsgradtage zu berechnen. In dieser Arbeit wird die folgende Formel berechnet:
@@ -79,6 +103,8 @@ Hierbei bezeichnet $T_{mean}$ die mittlere 2m-Temperatur eines Tages und $T_0$ d
 	\hline
 \end{tabular}
 
-
+\subsection{TNBI}
+\subsection{Gitterpunkte räumlich zuordnen?}
+\section{Ergebnisse}
 
 \end{document}

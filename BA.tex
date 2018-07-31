@@ -3,6 +3,7 @@
 \documentclass[]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{csquotes}
 \begin{document}
 
@@ -37,11 +38,23 @@ Der \textit{Normalized Divergence Vegetation Index} (NDVI) ist ein Index, der au
 NDVI=\frac{NIR - VIS}{NIR + VIS}
 \end{equation}
 $NIR$ steht hier für Reflexion im Nah-Infrarotbereich, $VIS$ für Reflexion im sichtbaren Wellenlängenbereich, beide Werte in $\%$.
+\begin{figure}
+	\centering
+  \includegraphics[width=0.75\textwidth]{ndvi_example.jpg}
+	\caption{Beispielhafte NDVI-Werte}
+	\label{fig1}
+\end{figure}
+Abbildung \ref{fig1} zeigt die NDVI-Berechnung an zwei beispielhaften Fällen: Links die Strahlungssituation über verhältnismäßig dichter Vegetation mit aktiver Photosynthese und rechts einen Fall von eher schwacher, trockener oder inaktiver Vegetation. Im linken Fall wird verhältnismäßig wenig sichtbares Licht reflektiert, gleichzeitig ist die Reflexion von Nah-Infrarot-Licht verhältnismäßig hoch. Dies führt zu einem relativ hohen NDVI. Im rechten Fall wird deutlich mehr sichtbares Licht reflektiert, dabei ist die Reflexion von Nah-Infrarot-Licht schwächer, was zu einem niedrigen NDVI führt.
+
+Der NDVI kann Werte zwischen -1 und 1 erreichen, wobei negative Werte eher selten sind. Ein hoher NDVI steht für dichte Vegetation mit hoher Photosyntheseaktivität, ein niedriger NDVI steht dagegen für wenig Vegetation bzw. wenig Photosyntheseaktivität in einem Pixel.
+
 [https://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring\_vegetation\_2.php]
 \subsection{Statistik?}
 \section{verwendete Daten}
 \subsection{Era-Interim}
 Für diese Arbeit wurden die Daten der Reanalyse Era-Interim verwendet. Die Entscheidung für Era-Interim fiel, da diese Reanalyse sich bereits in vielen Untersuchungen als zuverlässige Datenquelle bewiesen hat. Der verfübgare Zeitraum deckt gut den Zeitraum der verwendeten Satellitendaten ab. Außerdem war der Zugang zu diesen Daten relativ einfach, was in der begrenzten Zeit, die für eine Bachelorarbeit zur Verfügung steht, durchaus auch eine Rolle spielt. Mit einer Auflösung von etwa 80 km sind die Era-Interim-Daten deutlich gröber aufgelöst als die verwendeten Satellitendaten ($250m$ bzw $0,05^{\circ}$). Eine mit den Satellitendaten vergleichbar hoch aufgelöste Reanalyse gibt es allerdings nicht für den gesuchten Zeitraum und die gesuchte räumliche Ausdehnung.
+
+Die Reanalyse Era-Interim stellt Daten von 1979 bis 2018 zur Vefügung, mit einer Verzögerung von etwa zwei Monaten zur Qualitätssicherung wird sie kontinuierlich mit aktuellen Beobachtungsdaten verlängert.  
 \\
 \\
 

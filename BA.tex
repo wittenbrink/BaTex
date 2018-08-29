@@ -117,7 +117,13 @@ Hierbei bezeichnet $T_{mean}$ die mittlere 2m-Temperatur eines Tages und $T_0$ d
 \end{tabular}
 
 \subsection{TNBI}
-Nach den Vorgaben von [Zhang et. al.] wird aus den Satellitenbeobachtungen ein sogenannter \enquote{Temporally Normalized Brownness Index} (TNBI) berechnet. Hierfür werden die NDVI-Daten des AVHRR-Sensors verwendet. Diese müssen zunächst vorsortiert werden. Der verwendete Datensatz gibt für jeden Tag NDVI-Werte auf einem globalen Gitter mit einem Gitterpunktabstand von $0,05^\circ$ aus. Dieser Datensatz wird zum besseren Handling zunächst auf ein kleineres Gitter, welches sich auf das verwendete Gebiet (Nordamerika) beschränkt, zugeschnitten. Fehlerhafte NDVI-Werte entstehen häufig durch Wolkenbedeckung oder Wolkenschatten. Der verwendete NDVI-Datensatz liefert direkt QA-Flags (\enquote{Quality Assurance}) mit, welche die Bewölkung mit einbeziehen, sodass Beobachtungen mit einer Verfälschung durch Wolkeneinflüsse direkt aussortiert werden können.
+Nach den Vorgaben von [Zhang et. al.] wird aus den Satellitenbeobachtungen ein sogenannter \enquote{Temporally Normalized Brownness Index} (TNBI) berechnet. Hierfür werden die NDVI-Daten des AVHRR-Sensors verwendet. Diese müssen zunächst vorsortiert werden. Der verwendete Datensatz gibt für jeden Tag NDVI-Werte auf einem globalen Gitter mit einem Gitterpunktabstand von $0,05^\circ$ aus. Dieser Datensatz wird zum besseren Handling zunächst auf ein kleineres Gitter, welches sich auf das verwendete Gebiet (Nordamerika) beschränkt, zugeschnitten. Fehlerhafte NDVI-Werte entstehen häufig durch Wolkenbedeckung oder Wolkenschatten. Der verwendete NDVI-Datensatz liefert direkt QA-Flags (\enquote{Quality Assurance}) mit, welche die Bewölkung mit einbeziehen, sodass Beobachtungen mit einer Verfälschung durch Wolkeneinflüsse direkt aussortiert werden können. Außerdem werden in den QA-Flags technische Probleme der Sensoren angegeben. 
+\begin{figure}
+	
+  \includegraphics[width=1.\textwidth]{abb1a.pdf}
+	\caption{...}
+	\label{fig2}
+\end{figure}
 \subsection{Gitterpunkte räumlich zuordnen?}
 \section{Ergebnisse}
 

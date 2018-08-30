@@ -82,7 +82,7 @@ Dann ergibt sich:
 relhum(T,TD)=\exp\left(17,62\cdot\left(\frac{TD}{TD+243,12^{\circ}C}-\frac{T}{T+243,12^{\circ}C}\right)\right)
 \end{equation}
 Wachstumsgradtage bezeichnen eine Größe, die relativ häufig im Zusammenhang mit dem Wachstum von Pflanzen verwendet wird. Mit Wachstumsgradtagen wird die Anzahl Tage bezeichnet, an denen die Durchschnittstemperatur über einem
-Schwellwert liegt, gewichtet mit der Differenz zum Schwellwert. Es gibt unterschiedliche Methoden, diese Wachstumsgradtage zu berechnen. In dieser Arbeit wird die folgende Formel berechnet:
+Schwellwert liegt, gewichtet mit der Differenz zum Schwellwert. Es gibt unterschiedliche Methoden, diese Wachstumsgradtage zu berechnen. In dieser Arbeit werden die Wachstumsgradtage über die folgende Formel berechnet:
 \begin{equation}
 WGT=\begin{cases}
 T_{mean}-T_0 & \;\;\;\text{ wenn }  T_{mean}>T_0 \\
@@ -129,7 +129,7 @@ Aus dem so gefilterte Datensatz (es werden lediglich Daten übernommen, welche l
 \begin{equation}
 y(t)=\frac{1}{11}\cdot \sum_{i=-5}^{5} y(t+i)
 \end{equation}
-Um eine stärkere Glättung zu erhalten, wird dieses Glättungsverfahren für jede Zeitreihe drei mal hintereinander angewandt. Abbildung \ref{smoothe} zeigt eine beliebige gefilterte NDVI-Zeitreihe nach einem, zwei und nach drei Anwendungen der Glättungsprozedur. 
+Um eine stärkere Glättung zu erhalten, wird dieses Glättungsverfahren für jede Zeitreihe drei mal hintereinander angewandt. Abbildung \ref{smoothe} zeigt eine beliebige gefilterte NDVI-Zeitreihe nach einer, zwei und nach drei Anwendungen der Glättungsprozedur. 
 
 \begin{figure}
   \includegraphics[width=1.\textwidth]{smoothe.png}
@@ -138,12 +138,56 @@ Um eine stärkere Glättung zu erhalten, wird dieses Glättungsverfahren für je
 \end{figure}
 
 Da Schnee und Eis die NDVI-Messung verfälschen, werden alle Werte bei einer Bodentemperatur unter einem bestimmten Schwellwert durch einen Background-NDVI-Wert ersetzt. Dieser Schwellwert wurde hier auf $5^\circ C$ gesetzt. Der Background-NDVI-Wert ergibt sich aus dem Mittelwert des ersten und des letzten regulären NDVI-Wertes in der Zeitreihe eines Jahres für einen Pixel.
+
+Abbildung \ref{vglp} zeigt den Verlauf von ungefiltertem NDVI-Signal über das gefilterte Signal zum geglätteten Signal für einen beliebigen Pixel.
 \begin{figure}
-	
-  \includegraphics[width=1.\textwidth]{abb1a.pdf}
-	\caption{...}
-	\label{fig2}
+  \includegraphics[width=1.\textwidth]{vglp.png}
+	\caption{Vergleich des ungefilterten NDVI-Signals, des nach QA-Flags gefilterten und des geglätteten Signals eines beliebigen Pixels.}
+	\label{vglp}
 \end{figure}
+\\ \\
+Das gängigste vereinfachte Modell zur Beschreibung des Vegetationsverlaufs ist ein S-förmiges Modell. Der Verlauf des NDVI im Herbst, also in der Seneszenz-Phase, kann [nach Zhang et al...] mit folgender Funktion modelliert werden:
+\begin{equation}
+y(t)=\frac{c}{1+e^{a+bt}}+d
+\label{eq1}
+\end{equation}
+Hierbei ist $y(t)$ der NDVI-Wert zur Zeit $t$, $t$ ist die Zeit in Tagen, $a$ und $b$ sind Parameter, die den Verlauf der Seneszenz beschreiben, $c+d$ ist der maximale NDVI-Wert und $d$ ist der Background-NDVI-Wert.
+
+Im Idealfall (ohne Beeinflussung von Wolken oder anderen Fehlerquellen) kann der NDVI als Linearkombination aus einem NDVI-Anteil durch grüne Vegetation, einem Anteil durch farbige (nicht photosyntheseaktiv) Vegetation und einem Anteil durch die Landoberfläche (in erster Linie Erde bzw. Gestein), also:
+\begin{equation}
+y(t)=F_{g(t)}y_g+F_{c(t)}y_c+F_{b(t)}y_b
+\end{equation}
+, wobei $F_g$, $F_c$ und $F_b$ die Anteile von grüner Vegetation, farbiger Vegetation und exponierter Landoberfläche und $y_g$, $y_c$ und $y_b$ die zugehörigen NDVI-Werte sind.
+Da die NDVI-Werte für farbige Vegetation und exponierte Landoberfläche sehr wenig von einander abweichen, können sie vereinfachend zu \enquote{brauner Materie} zusammengefasst werden:
+\begin{equation}
+y(t)=F_{g(t)}y_g + F_{cb(t)}y_{cb} \;, \;\;\; F_{g(t)}+F_{cb(t)}=1
+\label{eq3}
+\end{equation}
+, wobei $F_{cb(t)}$ und $y_{cb}$ den Anteil bzw. den kombinierten NDVI-Wert für \enquote{braune Materie} darstellen. 
+
+Um den Laubverfärbungsstatus räumlich und zeitlich vergleichbar zu machen, haben [Zhang et al] den TNBI vorgestellt. Hierfür werden drei Dinge vorausgesetzt: 
+\begin{enumerate}
+\item Der minimale Anteil verfärbter Blätter ($F_{c\min}$) tritt direkt vor dem Einsatz der Seneszenz auf und liegt bei $F_{c\min}\approx 0$.
+\item Der Anteil verfärbter Blätter bezieht sowohl Blätter an der Vegetationsoberfläche als auch Blätter auf dem Boden ein, diese haben vergleichbare spektrale Eigenschaften.
+\item Der Anteil und der NDVI-Wert des exponierten Bodens sind konstant.
+\end{enumerate}
+Der TNBI kann dann folgendermaßen beschrieben werden:
+\begin{equation}
+TNBI(t)=\frac{F_{c(t)}-F_{c\min}}{F_{c\max}-F_{c\min}}=\frac{(F_{cb(t)}-F_b)-(F_{cb\min}-F_b)}{(F_{cb\max}-F_b)-(F_{cb\min}-F_b)}=\frac{F_{cb(t)}-F_{cb\min}}{F_{cb\max}-F_{cb\min}}
+\end{equation}
+Hierbei gilt: $F_{cb\min}=F_{c\min}+F_b, F_{cb\max}=F_{c\max}+F_b, F_{cb(t)}=F_{c(t)}+F_b$ .
+\\ \\
+$F_{cb\min}$ und $F_{cb\max}$ können aus den Gleichungen (\ref{eq1}) und (\ref{eq3}) hergeleitet werden:
+\begin{equation}
+F_{cb\max}=\lim\limits_{t \rightarrow \infty}{F_{cb(t)}}=\frac{d-y_g}{y_{cb}-y_g}
+\end{equation}
+\begin{equation}
+F_{cb\min}=\lim\limits_{t \rightarrow 0}{F_{cb(t)}}=\frac{c+d-y_g}{y_{cb}-y_g}
+\end{equation}
+Daraus kann folgende Formel für den TNBI abgeleitet werden:
+\begin{equation}
+TNBI(t)=1-\frac{1}{1+e^{a+bt}}
+\end{equation}
 \subsection{Gitterpunkte räumlich zuordnen?}
 \section{Ergebnisse}
 
